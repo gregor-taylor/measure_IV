@@ -54,6 +54,7 @@ class MainPage(ttk.Frame):
     def __init__(self, parent, controller):
         Frame.__init__(self, parent)
         self.get_devices(controller)
+        self.grid()
 
         ttk.Label(self, text="SIM address:").grid(row=1,column=1)
         self.SIM900_add_entry=ttk.Combobox(self, values=self.dev_list)
@@ -90,6 +91,19 @@ class MainPage(ttk.Frame):
         ttk.Label(self, text="Progress:").grid(row=6,column=3, columnspan=2)
         self.progress = ttk.Progressbar(self, orient='horizontal', length=250, mode='determinate') 
         self.progress.grid(row=7, column=3, columnspan=2)
+
+        #This is such an irritating way of making Tkinter widgets resize...
+        self.grid_columnconfigure(1,weight=1)
+        self.grid_columnconfigure(2,weight=1)
+        self.grid_columnconfigure(3,weight=1)
+        self.grid_columnconfigure(4,weight=1)
+        self.grid_rowconfigure(1,weight=1)
+        self.grid_rowconfigure(2,weight=1)
+        self.grid_rowconfigure(3,weight=1)
+        self.grid_rowconfigure(4,weight=1)
+        self.grid_rowconfigure(5,weight=1)
+        self.grid_rowconfigure(6,weight=1)
+        self.grid_rowconfigure(7,weight=1)
 
     def get_devices(self, controller):
         self.dev_list = controller.rm.list_resources()
